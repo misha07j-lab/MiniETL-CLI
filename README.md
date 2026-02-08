@@ -1,4 +1,15 @@
-# Mini ETL � Studio CLI Contract v1.0
+![version](https://img.shields.io/badge/version-1.0.0-blue)
+![platform](https://img.shields.io/badge/platform-win--x64-lightgrey)
+![contract](https://img.shields.io/badge/StudioCLI-Contract%20v1.0-green)
+
+## 📦 Download
+
+➡ Windows x64 binary:
+MiniETL-CLI-v1.0.0.exe (self-contained)
+
+See Releases section.
+
+# Mini ETL — Studio CLI Contract v1.0
 
 Lightweight CSV processing engine for filtering, transformation and aggregation.
 
