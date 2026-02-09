@@ -9,9 +9,9 @@ public static class MiniEtlCliDescriptor
     public static CliDescriptor Build(string version) =>
         new()
         {
-            ToolName = ToolName,
+            ToolName = "Mini ETL",
             Version = version,
-            Description = "Studio Standard",
+            Description = "Automation CLI Toolkit",
             Required = new()
             {
                 new CliOption { Name = "--input <file>", Description = "Input CSV file" },

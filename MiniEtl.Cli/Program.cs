@@ -1,8 +1,8 @@
 ﻿using MiniEtl.Cli.Help;
 using MiniEtl.Core.Factories;
+
 using System.Reflection;
 using System.Text;
-
 namespace MiniEtl.Cli;
 
 class Program
@@ -13,9 +13,9 @@ class Program
         Console.InputEncoding = Encoding.UTF8;
 
         var version = Assembly.GetExecutingAssembly()
-            .GetName()
-            .Version?
-            .ToString() ?? "unknown";
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+            .InformationalVersion
+            ?? "unknown";
 
         try
         {
@@ -41,9 +41,17 @@ class Program
                 return ExitCodes.InvalidArguments;
 
             var processor = ProcessorFactory.Create(options);
+
             var result = await processor.ProcessAsync(options);
 
+            var message = ErrorMessageMapper.GetMessage(result);
+            if (message is not null)
+            {
+                Console.Error.WriteLine($"Error: {message}");
+            }
+
             return ExitCodeMapper.Map(result);
+
         }
         catch (Exception ex)
         {
