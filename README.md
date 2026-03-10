@@ -94,11 +94,19 @@ mini-etl --version
 |--------|------------|
 | --input <file> | Input CSV file |
 | --output <file> | Output CSV file |
-| --filter "expr" | Filter expression |
+| --filter "expr" | Filter expression, e.g. "Status=Paid" |
 | --transform "expr" | Transform rules |
 | --aggregate "expr" | Aggregation rules |
 | --version | Show version |
 | --help | Show help |
+
+### Filter Examples
+
+```bash
+Mini ETL --input input.csv --output output.csv --filter "Status=Paid"
+Mini ETL --input input.csv --output output.csv --filter "Amount>=100"
+Mini ETL --input input.csv --output output.csv --filter "Status=Paid;Amount>=100"
+```
 
 ---
 

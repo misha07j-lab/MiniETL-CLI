@@ -69,6 +69,35 @@ public static class FilterParser
         "$" => FilterOperator.EndsWith,
         _ => throw new ArgumentOutOfRangeException(nameof(op), op, "Unsupported operator")
     };
+
+    public static List<FilterRule> Parse(string expression)
+    {
+        if (string.IsNullOrWhiteSpace(expression))
+            return new List<FilterRule>();
+
+        var result = new List<FilterRule>();
+        var parts = expression.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+        var currentPos = 0;
+
+        foreach (var rawPart in parts)
+        {
+            var part = rawPart.Trim();
+
+            if (part.Length == 0)
+            {
+                currentPos += rawPart.Length + 1;
+                continue;
+            }
+
+            var (field, op, value) = ParseSingle(part, currentPos);
+            result.Add(new FilterRule(field, op, value));
+
+            currentPos += rawPart.Length + 1;
+        }
+
+        return result;
+    }
 }
 
 

@@ -1,4 +1,5 @@
 ﻿using MiniEtl.Core.Contracts;
+using MiniEtl.Core.Filtering;
 
 namespace MiniEtl.Cli;
 
@@ -27,7 +28,10 @@ public static class ArgumentParser
 
                 case "--filter":
                     if (i + 1 < args.Length)
+                    {
                         options.FilterExpression = args[++i];
+                        options.FilterRules = FilterParser.Parse(options.FilterExpression);
+                    }
                     break;
 
                 case "--verbose":
